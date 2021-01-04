@@ -30,10 +30,14 @@ public class EnemyAI : MonoBehaviour
     public float timeToAttack;
     private bool alreadyAttacked;
 
+    private Rigidbody rb;
+
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        Physics.IgnoreLayerCollision(9, 10);
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -87,9 +91,9 @@ public class EnemyAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            Rigidbody rb = Instantiate(bullet, bulletSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 3f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 3f, ForceMode.Impulse);
+            Rigidbody _rb = Instantiate(bullet, bulletSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
+            _rb.AddForce(transform.forward * 3f, ForceMode.Impulse);
+            _rb.AddForce(transform.up * 3f, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeToAttack);
@@ -111,5 +115,13 @@ public class EnemyAI : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, walkPointRange);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 }

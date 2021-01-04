@@ -53,4 +53,9 @@ public class PlayerMotor : MonoBehaviour
                 cam.transform.Rotate(-cameraRotation);
         }
     }
+
+    public void StopOnCollision()
+    {
+        rb.velocity = Vector3.zero;
+    }
 }
