@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         Physics.IgnoreLayerCollision(9, 10);
         motor = GetComponent<PlayerMotor>();
+        motor.Rotate(new Vector3(0,0,0), new Vector3(0,0,0));
     }
 
     private void Update()
@@ -60,18 +61,17 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            
-            Ray ray = cam.ScreenPointToRay(crosshair.transform.position);
 
-            GameObject _bullet = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation) as GameObject;
-            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
-            Vector3 direction = (ray.GetPoint(100000.0f) - bullet.transform.position).normalized;
+            //GameObject _bullet = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation) as GameObject;
+            //Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
-            bulletRigidbody.AddForce(direction * 3f, ForceMode.Impulse);
-            //Rigidbody _rb = Instantiate(bullet, bulletSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
-            //_rb.AddForce(new Vector3(0.5f,0,0.5f) * 3f, ForceMode.Impulse);
-            //_rb.AddForce(transform.up * 3f, ForceMode.Impulse);
+            //Vector3 direction = (ray.GetPoint(100000.0f) - bullet.transform.position).normalized;
+
+            //bulletRigidbody.AddForce(ray.direction * 100f, ForceMode.Impulse);
+            Rigidbody _rb = Instantiate(bullet, bulletSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
+            _rb.AddForce(transform.forward * 3f, ForceMode.Impulse);
+            _rb.AddForce(transform.up * 3f, ForceMode.Impulse);
         }
     }
 
