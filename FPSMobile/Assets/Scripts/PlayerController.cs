@@ -69,9 +69,9 @@ public class PlayerController : MonoBehaviour
             //Vector3 direction = (ray.GetPoint(100000.0f) - bullet.transform.position).normalized;
 
             //bulletRigidbody.AddForce(ray.direction * 100f, ForceMode.Impulse);
-            Rigidbody _rb = Instantiate(bullet, bulletSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
-            _rb.AddForce(transform.forward * 3f, ForceMode.Impulse);
-            _rb.AddForce(transform.up * 3f, ForceMode.Impulse);
+            Rigidbody _rb = Instantiate(bullet, bulletSpawn.position, bullet.transform.rotation).GetComponent<Rigidbody>();
+            _rb.AddForce(transform.forward * 20f, ForceMode.Impulse);
+            _rb.AddForce(transform.up * 1.5f, ForceMode.Impulse);
         }
     }
 

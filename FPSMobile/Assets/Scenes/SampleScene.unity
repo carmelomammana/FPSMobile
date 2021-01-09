@@ -310,6 +310,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5810593548286404420, guid: 697d6c610f01f2b45be77bb24f65c5c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 5810593548286404421, guid: 697d6c610f01f2b45be77bb24f65c5c6,
         type: 3}
       propertyPath: m_Layer
@@ -324,6 +329,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681186287052363044, guid: 697d6c610f01f2b45be77bb24f65c5c6,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9e6fdb7bfc45d4d48ad99eedc050a082,
+        type: 3}
+    - target: {fileID: 7298602003058235259, guid: 697d6c610f01f2b45be77bb24f65c5c6,
+        type: 3}
+      propertyPath: m_Name
+      value: Crosshair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 697d6c610f01f2b45be77bb24f65c5c6, type: 3}
