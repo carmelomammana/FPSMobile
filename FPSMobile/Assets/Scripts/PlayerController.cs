@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Transform bulletSpawn;
+    public Transform laserEnd;
     public GameObject crosshair;
     public GameObject bullet;
     public Camera cam;
+    public LineRenderer laser;
 
     [SerializeField]
     private float speed = 5f;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
         Physics.IgnoreLayerCollision(9, 10);
         motor = GetComponent<PlayerMotor>();
         motor.Rotate(new Vector3(0,0,0), new Vector3(0,0,0));
+        SetLaser();
     }
 
     private void Update()
@@ -29,6 +32,18 @@ public class PlayerController : MonoBehaviour
         MoveInput();
         RotationInput();
         FireInput();
+    }
+
+    private void LateUpdate()
+    {
+        SetLaser();
+    }
+
+    private void SetLaser()
+    {
+        laser.positionCount = 2;
+        laser.SetPosition(0, bulletSpawn.position);
+        laser.SetPosition(1, laserEnd.position);
     }
 
     private void MoveInput()
@@ -61,17 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-
-
-            //GameObject _bullet = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation) as GameObject;
-            //Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
-
-            //Vector3 direction = (ray.GetPoint(100000.0f) - bullet.transform.position).normalized;
-
-            //bulletRigidbody.AddForce(ray.direction * 100f, ForceMode.Impulse);
-            Rigidbody _rb = Instantiate(bullet, bulletSpawn.position, bullet.transform.rotation).GetComponent<Rigidbody>();
-            _rb.AddForce(transform.forward * 20f, ForceMode.Impulse);
-            _rb.AddForce(transform.up * 1.5f, ForceMode.Impulse);
+            Rigidbody _rb = Instantiate(bullet, bulletSpawn.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Vector3 force = (laserEnd.position - bulletSpawn.position).normalized;
+            _rb.AddForce(force * 30f, ForceMode.Impulse);
+            //_rb.AddForce(transform.up * 1f, ForceMode.Impulse);
         }
     }
 
